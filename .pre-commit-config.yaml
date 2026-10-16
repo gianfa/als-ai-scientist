@@ -1,0 +1,27 @@
+# Install once per clone:
+#   .venv/bin/pre-commit install --hook-type pre-commit --hook-type pre-merge-commit
+# On every commit: the staged files. On every merge: the whole repository (the merge hook, not the commit one).
+# Everything is local on purpose: the tools are the ones pinned in uv.lock, not a second set of versions.
+repos:
+  - repo: local
+    hooks:
+      - id: code-quality
+        name: ruff, black, detect-secrets (staged files)
+        entry: scripts/dev/code-quality.sh
+        language: system
+        types: [text]
+        stages: [pre-commit]
+      - id: code-quality-full
+        name: ruff, black, detect-secrets (whole repository)
+        entry: scripts/dev/code-quality.sh
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [pre-merge-commit]
+      - id: workflows-built
+        name: built phase workflows match workflows/phases/src
+        entry: node workflows/build_workflow.mjs --check
+        language: system
+        files: ^workflows/
+        pass_filenames: false
+        stages: [pre-commit, pre-merge-commit]

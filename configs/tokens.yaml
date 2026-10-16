@@ -1,0 +1,41 @@
+# Token observability configuration.
+#
+# Limits are optional; null = no limit. Nothing enforces them: a run's spend cap is `run_max_cost_usd` in
+# configs/pipeline.yaml.
+# Prices are estimates; source and date are recorded here for reproducibility.
+# The UI polls live transcripts every `poll_s` seconds when in Live mode.
+
+version: 1
+
+limits:
+  max_input_tokens: null      # or e.g. 100000 to enforce a cap
+  max_output_tokens: null     # or e.g. 50000 to enforce a cap
+
+poll_s: 2
+
+prices_usd_per_mtok:
+  source: "claude-api skill, Current Models table (cached 2026-09-25); verified 2026-09-29"
+  models:
+    claude-fable-5-1:
+      input: 10
+      output: 50
+    claude-opus-5-5:
+      input: 4
+      output: 20
+    claude-sonnet-5:
+      input: 2
+      output: 10
+    claude-sonnet-5-5:
+      input: 2
+      output: 10
+    claude-haiku-4-5:
+      input: 1
+      output: 5
+    # Transcripts record the dated ID of `haiku`; same model, same price.
+    claude-haiku-4-5-20251001:
+      input: 1
+      output: 5
+  multipliers:
+    cache_read: 0.1
+    cache_write_5m: 1.25
+    cache_write_1h: 2.0

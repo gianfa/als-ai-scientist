@@ -1,0 +1,72 @@
+[project]
+name = "als-ai-scientist"
+version = "0.1.0"
+description = "ALS/C9orf72 AI scientist: dynamic workflow, config resolver and observability"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+dependencies = [
+    "jsonschema>=4.23",
+    "pyyaml>=6.0",
+    "pydantic>=2.13",
+]
+
+[project.optional-dependencies]
+# Diagnostic figures (`python -m evaluation.figures`) are an extra, not a dependency: the pipeline
+# and the default test suite stay stdlib+pydantic, and a run never needs a plotting stack installed.
+figures = [
+    "matplotlib>=3.10",
+]
+causal = [
+    "dowhy>=0.14",
+    "econml>=0.17.0",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.10.1",
+    "detect-secrets>=1.5.0",
+    "pre-commit>=4.6.2",
+    "pytest>=8",
+    "ruff>=0.17.0",
+]
+mcp = [
+    "mcp==2.2.0",
+]
+
+[tool.uv]
+package = false
+# The MCP server is part of the pipeline, so its tests must run by default, not be skipped.
+default-groups = ["dev", "mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Tests import the first-party packages (analysis, evaluation, observability, pipeline) by
+# name. The project is not installed (`[tool.uv] package = false`), so without this the
+# repository root is absent from sys.path and 9 of 15 test modules fail to import.
+pythonpath = ["."]
+
+# Code quality (hooks: .pre-commit-config.yaml). One line length for both tools, so they never disagree.
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+extend-exclude = '/(experiments|worktrees|dist|node_modules)/'
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["experiments", "worktrees", "dist", "node_modules"]
+
+[tool.ruff.lint]
+# pycodestyle errors/warnings, pyflakes, isort. Formatting is black's job, not ruff's.
+select = ["E", "W", "F", "I"]
+# E501 off below: black wraps code, and what it cannot wrap (URLs, quoted source text, long strings) is deliberate.
+ignore = [
+    "E501",
+    "E741",  # `l` as a throwaway comprehension variable
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Scripts put the repository root on sys.path before importing first-party packages.
+"scripts/**/*.py" = ["E402"]
+# The page served by the observer is an HTML/CSS string: its whitespace is content, not source style.
+"observability/wf_observer/server.py" = ["W291", "W293"]

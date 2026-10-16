@@ -1,0 +1,108 @@
+pair_id,band,a_id,a_name,b_id,b_name,duplicate,reason
+P-001,A,N-13,ALS patients,N-45,ALS_patients,yes,underscore for space
+P-002,A,N-364,ATX-MS-1467,N-536,ATX-MS-1467 (chronic antigen-specific peptide treatment),unclear,the drug alone against a named regimen of it
+P-003,A,N-364,ATX-MS-1467,N-662,ATX-MS-1467 (chronic antigen-specific peptide immunotherapy),unclear,the drug alone against a named regimen of it
+P-004,A,N-536,ATX-MS-1467 (chronic antigen-specific peptide treatment),N-662,ATX-MS-1467 (chronic antigen-specific peptide immunotherapy),yes,treatment and immunotherapy name the same regimen
+P-005,A,N-363,autologous Treg infusion,N-410,Autologous Treg infusion (with IL-2),no,"the second is a combination therapy, a different intervention"
+P-006,A,N-19,C9orf72 epitopes,N-447,C9orf72 epitope,yes,plural
+P-007,A,N-277,C9orf72 loss-of-function,N-573,C9orf72 loss-of-function (reduced expression),unclear,loss of function against the mechanism stated for it
+P-008,A,N-83,C9orf72 protein,N-87,C9orf72 protein (loss of function),no,the protein against its perturbation
+P-009,A,N-602,C9orf72-reactive CD4+ T cells,N-669,C9orf72-reactive CD4+ T cell,yes,plural
+P-010,A,N-422,Circulating regulatory T-cell number,N-425,circulating regulatory T cell (Treg) number,yes,hyphen and a parenthetical alias
+P-011,A,N-459,FoxP3+ Treg,N-480,FoxP3+ Tregs,yes,plural
+P-012,A,N-368,GM-CSF,N-660,GM-CSF (sargramostim),yes,parenthetical alias
+P-013,A,N-46,IL10,N-5,IL-10,yes,hyphen in a gene or cytokine number
+P-014,A,N-46,IL10,N-532,IL-10 (AAV spinal cord overexpression),no,the second is an intervention delivering it
+P-015,A,N-5,IL-10,N-532,IL-10 (AAV spinal cord overexpression),no,the second is an intervention delivering it
+P-016,A,N-398,IL-10-mediated C9orf72-specific T-cell response magnitude,N-491,IL-10-mediated C9orf72-specific T cell response magnitude,yes,hyphen in T-cell
+P-017,A,N-112,IL-10-mediated T-cell response,N-231,IL-10-mediated T-cell responses,yes,hyphen and plural
+P-018,A,N-112,IL-10-mediated T-cell response,N-591,IL-10-mediated T cell response,yes,hyphen
+P-019,A,N-112,IL-10-mediated T-cell response,N-70,IL-10-mediated T cell responses,yes,hyphen and plural
+P-020,A,N-231,IL-10-mediated T-cell responses,N-591,IL-10-mediated T cell response,yes,hyphen and plural
+P-021,A,N-231,IL-10-mediated T-cell responses,N-70,IL-10-mediated T cell responses,yes,hyphen
+P-022,A,N-591,IL-10-mediated T cell response,N-70,IL-10-mediated T cell responses,yes,plural
+P-023,A,N-214,IL-10-mediated T cell responses to C9orf72,N-257,IL-10-mediated T-cell responses to C9orf72,yes,hyphen
+P-024,A,N-389,low-dose IL-2,N-424,low-dose IL-2 (IL-2LD),yes,parenthetical alias
+P-025,A,N-421,Low-dose IL-2 (IL-2LD) treatment,N-542,low-dose IL-2 treatment,yes,parenthetical alias
+P-026,A,N-253,motor neuron,N-31,motor_neurons,yes,underscore and plural
+P-027,A,N-253,motor neuron,N-84,Motor neurons,yes,case and plural
+P-028,A,N-31,motor_neurons,N-84,Motor neurons,yes,underscore and case
+P-029,A,N-182,Motor neuron autophagy-lysosomal proteostasis,N-440,motor-neuron autophagy-lysosomal proteostasis,yes,hyphen in motor-neuron
+P-030,A,N-452,motor neuron damage (reduced via c6),N-75,motor neuron damage,no,the parenthetical reverses the sign: damage reduced is not damage
+P-031,A,N-194,motor neuron injury,N-313,motor-neuron injury,yes,hyphen in motor-neuron
+P-032,A,N-194,motor neuron injury,N-549,motor neuron injury (neuroinflammatory),unclear,neuroinflammatory injury may be a subtype rather than the same node
+P-033,A,N-313,motor-neuron injury,N-549,motor neuron injury (neuroinflammatory),unclear,neuroinflammatory injury may be a subtype rather than the same node
+P-034,A,N-365,myelin basic protein,N-535,myelin basic protein (MBP),yes,parenthetical abbreviation
+P-035,A,N-402,peptide 361-375 (TPDLNIFQDVLHRDT),N-524,peptide 361-375,yes,parenthetical sequence of the same peptide
+P-036,A,N-401,peptide 366-380 (IFQDVLHRDTLVKAF),N-523,peptide 366-380,yes,parenthetical sequence of the same peptide
+P-037,A,N-403,peptide 381-395 (LDQVFQLKPGLSLRS),N-525,peptide 381-395,yes,parenthetical sequence of the same peptide
+P-038,A,N-404,peptide 406-420 (HRKALTLIKYIEDDT),N-526,peptide 406-420,yes,parenthetical sequence of the same peptide
+P-039,A,N-400,peptide 41-55 (VRHIWAPKTEQVLLS),N-522,peptide 41-55,yes,parenthetical sequence of the same peptide
+P-040,A,N-405,peptide 426-440 (PFKSLRNLKIDLDLT),N-527,peptide 426-440,yes,parenthetical sequence of the same peptide
+P-041,A,N-406,peptide 431-445 (RNLKIDLDLTAEGDL),N-528,peptide 431-445,yes,parenthetical sequence of the same peptide
+P-042,A,N-334,predicted survival,N-44,predicted_survival,yes,underscore for space
+P-043,A,N-11,regulatory T cells,N-362,regulatory T cells (Treg),yes,parenthetical abbreviation
+P-044,A,N-11,regulatory T cells,N-529,regulatory T cells (passive transfer),no,"passive transfer is an intervention, not the cell population"
+P-045,A,N-362,regulatory T cells (Treg),N-529,regulatory T cells (passive transfer),no,"passive transfer is an intervention, not the cell population"
+P-046,A,N-367,sargramostim,N-597,sargramostim (GM-CSF),yes,parenthetical alias
+P-047,A,N-453,systemic immune competence,N-672,systemic immune competence (non-C9orf72 antigen responses),unclear,the parenthetical narrows the measured scope
+P-048,A,N-56,systemic_immunity,N-81,systemic immunity,yes,underscore for space
+P-049,A,N-471,T-cells,N-6,T cells,yes,hyphen and plural
+P-050,A,N-125,T cell responses,N-59,T-cell responses,yes,hyphen
+P-051,A,N-125,T cell responses,N-641,T cell response,yes,plural
+P-052,A,N-59,T-cell responses,N-641,T cell response,yes,hyphen and plural
+P-053,A,N-127,T cell subsets,N-256,T-cell subsets,yes,hyphen
+P-054,A,N-51,therapeutic_intervention,N-79,therapeutic intervention,yes,underscore for space
+P-055,A,N-224,Treg,N-242,Tregs,yes,plural
+P-056,B,N-114,C9orf72-specific CD4+ T cells,N-309,CD4+ C9orf72-specific T cells,yes,"same tokens, different order"
+P-057,B,N-150,motor neuron function,N-430,motor neuron/motor function,yes,slash reads as the same function
+P-058,B,N-738,motor neuron neuroprotection and survival,N-109,Motor neuron survival and neuroprotection,yes,"same two outcomes, different order"
+P-059,C,N-824,C9orf72 epitope T cell reactivity,N-859,C9orf72 epitope-specific T cell reactivity,yes,epitope-specific adds no referent
+P-060,C,N-449,C9orf72-specific CD4+ T-cell response,N-375,C9orf72-specific autoreactive CD4+ T-cell response,unclear,autoreactive may be a qualifier or a narrower population
+P-061,C,N-229,IL-10 production by C9orf72-specific CD4+ T cells,N-187,IL-10 cytokine production by C9orf72-specific CD4+ T cells,yes,cytokine is redundant before IL-10
+P-062,C,N-229,IL-10 production by C9orf72-specific CD4+ T cells,N-38,IL-10 production by C9orf72-specific regulatory CD4+ T cells,no,"regulatory CD4+ T cells are a subset, not the population"
+P-063,C,N-511,IL-10 production by CD4+ T cells,N-229,IL-10 production by C9orf72-specific CD4+ T cells,no,C9orf72-specific narrows the population
+P-064,C,N-214,IL-10-mediated T cell responses to C9orf72,N-129,IL-10-mediated CD4+ T cell response to C9orf72,unclear,CD4+ may narrow the responding population
+P-065,C,N-734,IL-5 production by CD4+ T cells,N-101,IL-5 production by C9orf72-specific CD4+ T cells,no,C9orf72-specific narrows the population
+P-066,C,N-501,impaired motor neuron autophagy-lysosomal proteostasis,N-730,impaired autophagy-lysosomal proteostasis in motor neurons,yes,"same statement, in motor neurons moved"
+P-067,C,N-166,longer predicted survival in ALS,N-130,longer predicted survival time in ALS,yes,survival and survival time name the same outcome here
+P-068,C,N-97,Loss of tolerance to C9orf72,N-20,loss of peripheral tolerance to C9orf72,unclear,peripheral localises the tolerance and may be a distinct node
+P-069,C,N-731,reduced motor neuron stress resilience,N-319,reduced stress resilience in motor neurons,yes,"same statement, in motor neurons moved"
+P-070,C,N-868,Regulatory T-cell number and function,N-869,Regulatory T-cell number and suppressive function,yes,suppressive qualifies the same function
+P-071,C,N-601,Th2 versus pTreg lineage commitment of naive C9orf72-reactive CD4+ T cells,N-606,Th2 versus pTreg/Tr1 lineage commitment of naive C9orf72-reactive CD4+ T cells,unclear,pTreg/Tr1 may name a different lineage pair
+P-072,C,N-593,Treg infusion with low-dose IL-2,N-595,Treg infusion with subcutaneous low-dose IL-2,unclear,"subcutaneous specifies a route, which may matter"
+P-073,D1,N-147,peptides,N-400,peptide 41-55 (VRHIWAPKTEQVLLS),no,a class against one of its members
+P-074,D1,N-123,disease progression,N-281,ALS disease progression,unclear,"every record in this base is about ALS, so the qualifier may be redundant"
+P-075,D1,N-488,suppression,N-755,contact-dependent suppression,no,contact-dependent names a specific mechanism
+P-076,D1,N-1,C9orf72,N-805,C9orf72 epitope clustering,no,a molecule against a process involving it
+P-077,D1,N-19,C9orf72 epitopes,N-587,C9orf72 epitope reactivity,no,the epitopes against reactivity to them
+P-078,D1,N-473,C9orf72-specific,N-69,C9orf72-specific responses,unclear,"C9orf72-specific alone is a fragment, not a referent"
+P-079,D1,N-714,protection,N-145,motor neuron protection,no,general protection against motor neuron protection
+P-080,D1,N-1,C9orf72,N-644,C9orf72 peptide 366-IFQDVLHRDTLVKAF-380,no,a gene against one peptide of its product
+P-081,D1,N-224,Treg,N-481,Treg differentiation,no,the cells against their differentiation
+P-082,D1,N-46,IL10,N-195,IL-10 responses,no,the cytokine against responses mediated by it
+P-083,D1,N-85,Autophagy,N-185,autophagy impairment,no,the process against its impairment
+P-084,D1,N-83,C9orf72 protein,N-615,C9orf72 protein expression,no,the protein against its expression level
+P-085,D1,N-471,T-cells,N-727,CD4+ T cell priming,no,the cells against a process they undergo
+P-086,D1,N-453,systemic immune competence,N-496,Preservation of systemic immune competence,no,the state against the act of preserving it
+P-087,D1,N-19,C9orf72 epitopes,N-805,C9orf72 epitope clustering,no,the epitopes against their clustering
+P-088,D1,N-124,longer predicted survival time,N-130,longer predicted survival time in ALS,unclear,in ALS may be redundant in this base
+P-089,D1,N-473,C9orf72-specific,N-716,C9orf72-specific compartment,no,a fragment against a named compartment
+P-090,D1,N-471,T-cells,N-114,C9orf72-specific CD4+ T cells,no,all T cells against a specific subset
+P-091,D1,N-1,C9orf72,N-646,C9orf72 peptide 381-LDQVFQLKPGLSLRS-395,no,a gene against one peptide of its product
+P-092,D1,N-2,CD4+ T cells,N-114,C9orf72-specific CD4+ T cells,no,all CD4+ T cells against the C9orf72-specific subset
+P-093,D1,N-8,IL-5,N-238,IL-5 suppression,no,the cytokine against its suppression
+P-094,D1,N-1,C9orf72,N-648,C9orf72 peptide 426-PFKSLRNLKIDLDLT-440,no,a gene against one peptide of its product
+P-095,D1,N-488,suppression,N-238,IL-5 suppression,no,general suppression against suppression of IL-5
+P-096,D1,N-1,C9orf72,N-327,C9orf72 epitope exposure,no,a gene against exposure of its epitopes
+P-097,D1,N-8,IL-5,N-745,IL-5 antagonism,no,the cytokine against its antagonism
+P-098,D2,N-1,C9orf72,N-437,C9orf72 epitope-specific peptide immunotherapy,no,a gene against a therapy directed at it
+P-099,D2,N-471,T-cells,N-601,Th2 versus pTreg lineage commitment of naive C9orf72-reactive CD4+ T cells,no,all T cells against a lineage decision in a subset
+P-100,D2,N-473,C9orf72-specific,N-101,IL-5 production by C9orf72-specific CD4+ T cells,no,a fragment against a cytokine measurement
+P-101,D2,N-411,IL-2,N-593,Treg infusion with low-dose IL-2,no,a cytokine against a combination therapy using it
+P-102,D2,N-147,peptides,N-605,tolerogenic co-signal availability at the time of C9orf72 peptide exposure,no,peptides against a co-signal condition
+P-103,D2,N-473,C9orf72-specific,N-142,Selective suppression of C9orf72-specific pathogenic responses; preservation of systemic anti-pathogen and anti-tumor immunity,no,a fragment against a therapeutic goal
+P-104,D2,N-471,T-cells,N-139,Low ratio of IL-10-producing to Th1/Th17/pro-inflammatory C9orf72-specific T cells,no,all T cells against a cytokine ratio within a subset
+P-105,D2,N-473,C9orf72-specific,N-375,C9orf72-specific autoreactive CD4+ T-cell response,no,a fragment against a named T-cell response
+P-106,D2,N-125,T cell responses,N-551,selective IL-17A neutralization in C9orf72-reactive T-cell responses,no,T cell responses against a neutralisation inside them
+P-107,D2,N-331,IL-5-driven neuroinflammation,N-794,incomplete suppression of IL-5-driven neuroinflammation despite IL-10 presence,no,a process against incomplete suppression of it

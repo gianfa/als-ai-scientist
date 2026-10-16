@@ -1,0 +1,69 @@
+/*-- scss:defaults --*/
+// Paper-like look, after the single-column style of NeurIPS/ICML proceedings:
+// serif body, black on white, narrow measure, restrained colour.
+$font-family-serif: "Source Serif 4", "Times New Roman", Times, serif;
+$font-family-sans-serif: $font-family-serif;
+$font-family-monospace: "Source Code Pro", ui-monospace, monospace;
+$font-size-root: 17px;
+$body-color: #111;
+$body-bg: #fff;
+$link-color: #1a4f8b;
+$headings-font-weight: 700;
+$headings-color: #000;
+$navbar-bg: #fff;
+$navbar-fg: #111;
+$footer-bg: #fff;
+$code-color: #6a1b1b;
+$border-radius: 0;
+
+/*-- scss:rules --*/
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&family=Source+Code+Pro:wght@400;600&display=swap");
+
+body { line-height: 1.5; text-align: justify; hyphens: auto; }
+main.content { max-width: 46rem; }
+.navbar { border-bottom: 1px solid #000; }
+.navbar-title { font-variant: small-caps; letter-spacing: .03em; }
+
+#title-block-header { text-align: center; margin-bottom: 2rem; }
+#title-block-header .title { font-size: 1.9rem; line-height: 1.25; }
+#title-block-header .subtitle { font-size: 1.05rem; font-style: italic; color: #333; }
+.quarto-title-meta { justify-content: center; }
+.abstract { margin: 1.5rem 2.5rem 0; text-align: justify; font-size: .95rem; }
+.abstract .block-title, .abstract-title { text-align: center; font-size: 1.05rem; font-weight: 700; }
+
+h2 { font-size: 1.3rem; border-bottom: none; margin-top: 2rem; }
+h3 { font-size: 1.1rem; }
+h4 { font-size: 1rem; font-style: italic; }
+
+table { font-size: .9rem; border-top: 2px solid #000; border-bottom: 2px solid #000; }
+table thead th { border-bottom: 1px solid #000 !important; }
+table td, table th { border: none !important; padding: .25rem .6rem; }
+.table-striped > tbody > tr:nth-of-type(odd) > * { --bs-table-accent-bg: transparent; }
+
+pre, code { font-size: .85em; }
+div.sourceCode { background: #f7f7f5; border: 1px solid #ddd; }
+figcaption { font-size: .9rem; text-align: left; }
+.sidebar nav[role="doc-toc"] ul > li > a, .sidebar-item-text { font-size: .9rem; }
+
+// Project page (index.qmd): a single centred column in the style of academic paper websites, without the
+// documentation's navbar and sidebar.
+body.project-page #quarto-header, body.project-page #title-block-header { display: none; }
+body.project-page { text-align: left; }
+.pp-hero, .pp-body { max-width: 52rem; margin: 0 auto; padding: 0 1rem; }
+.pp-hero { text-align: center; padding-top: 4rem; padding-bottom: 1.5rem; }
+.pp-venue { display: block; font-size: .95rem; font-style: italic; color: #555; margin-bottom: 1rem; }
+.pp-hero h1.pp-title { font-size: 2.3rem; line-height: 1.2; border: none; margin: 0 0 1.2rem; }
+.pp-authors { display: block; font-size: 1.2rem; margin-bottom: .3rem; }
+.pp-affiliation { display: block; font-size: .95rem; color: #555; margin-bottom: 1.6rem; }
+.pp-links p { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; }
+.pp-btn {
+  display: inline-flex; align-items: center; gap: .45rem; padding: .45rem 1.1rem;
+  border-radius: 999px; background: #222; color: #fff !important; text-decoration: none;
+  font-family: system-ui, sans-serif; font-size: .95rem;
+  &:hover { background: #000; }
+}
+.pp-body { padding-bottom: 4rem; }
+.pp-body h2 { text-align: center; font-size: 1.6rem; margin-top: 2.5rem; }
+.pp-body > p, .pp-body .figure { text-align: justify; }
+.pp-teaser img, .pp-teaser video { width: 100%; border: 1px solid #ddd; }
+.pp-body figcaption { text-align: center; }

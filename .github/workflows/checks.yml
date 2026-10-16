@@ -1,0 +1,53 @@
+# The deterministic checks a contributor runs before committing (docs/testing.md), on every push and pull
+# request: Python and workflow test suites, the built-workflow check, the Python syntax check and code quality.
+# Nothing here calls a paid API, needs a GPU or downloads the third-party inputs: tests that need them skip.
+# Tool versions follow .devcontainer/Dockerfile (Python 3.10, uv 0.12.19, Node 22.23.3).
+name: Checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_PROJECT_ENVIRONMENT: .venv
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # the AI-usage report test reads the git history
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: 0.12.19
+          python-version: "3.10"
+      - name: Install the locked environment
+        run: uv sync --frozen
+      - name: Test suite
+        # CI makes no git commit for now: a test that commits skips itself when CI=true.
+        run: uv run --frozen python -m pytest -q
+      - name: Python syntax check
+        run: scripts/dev/python-syntax-check.sh
+      - name: Code quality (ruff, black, detect-secrets)
+        run: scripts/dev/code-quality.sh
+
+  workflows:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+      - name: Workflow tests (mocked agents)
+        run: node --test tests/workflow/*.test.js
+      - name: Built workflows match their sources
+        run: node workflows/build_workflow.mjs --check

@@ -1,0 +1,163 @@
+# Configuration of the phase-based discovery pipeline. Read by pipeline/config.py.
+version: "1"
+
+objective: >-
+  Identify a therapeutic intervention capable of selectively modifying the C9orf72-associated immune mechanism in
+  ALS while preserving systemic immune competence and protecting motor neurons.
+
+launcher:
+  model: claude-sonnet-5          # the `claude -p` session that only calls the Workflow tool
+  timeout_s: 1800                 # per phase
+  # No per-session budget: each session is launched with what is left of run_max_cost_usd below. A smaller
+  # per-phase cap stops the workflow's agents mid-phase and loses what they spent.
+
+# Whole-run cap. Smoke-run phase costs on Haiku 4.5, scaled by 2x for Sonnet 5 (configs/tokens.yaml) and by this
+# config's larger settings (4 literature questions, 3 perspectives, context_limit 40, max_claims 8), give an
+# expected 15-19 USD for all phases including `execute` and `reassess`. The margin matters: a run stopped by
+# the cap near its last phase wastes everything already spent. A total above 21 is a signal to re-cost, not
+# to raise the cap.
+run_max_cost_usd: 24              # whole run, all phases, enforced by pipeline/cost_watch.py
+
+# Resolved against the repository root by `PipelineConfig.store_path`. A path relative to anything else
+# silently reads a fresh, near-empty store instead of the real one.
+literature_store: literature/store
+fetch_max_new: 10                 # papers newly downloaded per phase to check quotes against
+
+phases:
+  data:
+    sources:
+    - id: michaelis-table1-epitopes
+      acquire:
+        see: docs/data-acquisition.md section 1
+        steps:
+        - run: scripts/data/paper-download.py --format pdf
+        - by_hand: open the URL it prints, save the PDF as literature/inbox/michaelis-2025.pdf, then extract it with
+            Paper2Agent using the command in docs/data-acquisition.md section 1.1 — the --output path and
+            the default table asset names are what this source's path depends on
+        - run: scripts/setup/check-paper2agent.sh
+      path: dist/michaelis-2025-agent/skill/michaelis-2025-paper/assets/table/table-p0006-001.csv
+      kind: table
+      license_note: Extraction from Michaelis et al. (2025), CC BY-NC-ND 4.0; local paper2agent output, not redistributed.
+    - id: michaelis-table2-hla
+      acquire:
+        see: docs/data-acquisition.md section 1
+        steps:
+        - run: scripts/data/paper-download.py --format pdf
+        - by_hand: open the URL it prints, save the PDF as literature/inbox/michaelis-2025.pdf, then extract it with
+            Paper2Agent using the command in docs/data-acquisition.md section 1.1 — the --output path and
+            the default table asset names are what this source's path depends on
+        - run: scripts/setup/check-paper2agent.sh
+      path: dist/michaelis-2025-agent/skill/michaelis-2025-paper/assets/table/table-p0006-007.csv
+      kind: table
+      license_note: Extraction from Michaelis et al. (2025), CC BY-NC-ND 4.0; local paper2agent output, not redistributed.
+    - id: iedb-netmhciipan-cache
+      acquire:
+        see: docs/data-acquisition.md section 5
+        steps:
+        - by_hand: read section 5 first; the DTU academic licence must apply to you. Needs the two tables above
+        - run: scripts/data/iedb-cache-acquire.py
+      path: data/external/iedb-cache/netmhciipan.jsonl
+      kind: table
+      license_note: IEDB/NetMHCIIpan predictions acquired once under the DTU academic licence (LICENSES.md); third-party
+        output, git-ignored, not redistributed. The licence forbids publishing benchmark results of the predictor.
+    - id: als-gwas-gcst90027164
+      acquire:
+        see: docs/data-acquisition.md section 4
+        steps:
+        - run: scripts/data/gwas-data-download.sh
+      path: data/external/gwas-als/GCST90027164_buildGRCh37.tsv.gz
+      kind: sumstats
+      license_note: 'GWAS Catalog summary statistics, GCST90027164 (van Rheenen et al. 2021),
+        European-ancestries meta-analysis, GRCh37, as submitted: the study metadata declares
+        is_harmonised false, and the catalogue harmonised/ deposit is a different file. EMBL-EBI Terms of
+        Use; cite the study.'
+    # Read by the registered `ics_cytokine_skew_v1` analysis, which uses the FlowJo workspaces of the four ICS
+    # records and the deposited FCS file names; no analysis reads FCS events.
+    - id: michaelis-zenodo-cytometry
+      acquire:
+        see: docs/data-acquisition.md section 2
+        steps:
+        - run: scripts/data/michaelis-data-download.sh
+      path: data/external/michaelis-2025-zenodo
+      kind: raw
+      license_note: Michaelis et al. (2025) Zenodo deposit, raw flow-cytometry files; not redistributed.
+      required: false
+    # The figure source data of the article, read by `ics_cytokine_skew_v1` to check its recomputed values
+    # against the published ones (sheet "ED Fig. 4").
+    - id: michaelis-source-data
+      acquire:
+        see: docs/data-acquisition.md section 3
+        steps:
+        - by_hand: run the curl block of docs/data-acquisition.md section 3
+      path: data/external/michaelis-2025-nature-supp/41586_2025_9588_MOESM3_ESM.xlsx
+      kind: table
+      license_note: Source data of Michaelis et al. (2025), CC BY-NC-ND 4.0 article; local only, not redistributed.
+      required: false
+  compute:
+    analyses:
+    - a1_immunodominance
+    - a2_epitope_clustering
+    - a3_gwas_loci
+    - a4_hla_binding
+    seed: 20260928
+  literature:
+    model: claude-sonnet-5
+    max_claims: 8
+    # Papers an agent of this phase may bring into the store itself when `check_quote` says
+    # `paper_not_in_store` and it holds a DOI/PMID/PMCID. Measured over 14 archives:
+    # ~11 such dead ends per run, so 8 here and 4 in `review` cover them. 0 removes the tool.
+    agent_fetch_max_new: 8
+    questions:
+      - Which C9orf72-specific T-cell responses are observed in ALS, in which T-cell subsets, and with which cytokines?
+      - Which C9orf72 epitopes and HLA class II restrictions are reported for ALS-associated autoreactivity?
+      - Which evidence links regulatory T cells or IL-10 responses to ALS progression or survival?
+      - Which antigen-specific or Treg-based immunotherapies have been tested in ALS or other neurodegenerative diseases?
+  generate:
+    model: claude-sonnet-5
+    context_limit: 40             # claims passed to each author
+    perspectives:
+      - immunology (loss of peripheral tolerance, T-cell polarisation)
+      - neurodegeneration (motor-neuron injury and the role of C9orf72 loss/gain of function)
+      - therapeutics (what could be modulated, and with which intervention class)
+  review:
+    model: claude-sonnet-5
+    reviewers: 2
+    hops: 2
+    agent_fetch_max_new: 4        # see `literature.agent_fetch_max_new`
+  verify:
+    model: claude-sonnet-5
+    batch_size: 10
+    # Which relations the verifier is offered.
+    #
+    # false (default, RECOMMENDED): every `agent_inference` supports/contradicts in the knowledge base that no
+    #   verified relation already covers and whose source claim has something to check. This is what makes an
+    #   append-only store worth keeping: a relation written by an earlier run can be judged by a later one, and
+    #   an overstated claim can be narrowed into a verified restatement whatever run wrote it.
+    # true: only the relations THIS run wrote. Cheaper, and strictly less verification.
+    #
+    # The impact, as measured on one production run: the store held 568 such relations and that run had
+    # written 49 of them, so its `verify` phase paid 5.524 USD over 278 candidates in 28 batches to judge
+    # mostly other runs' work -- about a third of a 16.693 USD run. With `true` the pool is this run's own
+    # relations only (~49 there, ~5 batches).
+    #
+    # What `true` gives up, and why it is not the default: the backlog is never worked down, so an overstated
+    # claim written by an earlier run keeps being cited and never gets narrowed; cross-run verification, the
+    # one thing the shared store buys, stops happening; and `verify`'s counts stop being comparable with the
+    # runs before it. Use it when the question under test is about this run's own output and the budget is the
+    # binding constraint -- and say so in that run's pre-registration.
+    #
+    # Set to `true` here to bound cost. The recommendation for any run that is not cost-bound stays `false`.
+    only_on_run_kb: true
+  design:
+    model: claude-sonnet-5
+    hops: 2
+  arbitrate:
+    model: claude-sonnet-5
+    hops: 2
+  intervene:
+    model: claude-sonnet-5
+    hops: 2
+    drug_lookup_enabled: false
+  synthesize:
+    model: claude-sonnet-5
+    hops: 1

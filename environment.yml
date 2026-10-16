@@ -1,0 +1,10 @@
+# Conda environment. Python packages come from requirements.txt; see docs/quick-start.md.
+name: als-ai-scientist
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - nodejs=22
+  - pip
+  - pip:
+      - -r requirements.txt

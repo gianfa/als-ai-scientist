@@ -1,0 +1,117 @@
+{
+  "note": "Candidate papers for exercising the literature tool: the identifiers that agents cited in four earlier runs (excluding Michaelis 2025, see michaelis-2025.json): every entry has an open-access full text on Europe PMC (fetched and checked, not committed). Their existence is confirmed; their relevance to the research question is NOT assessed and some are tangential. Ordered by how often the archived runs cited them (the default fetch cap is 5 per run: raise --max-new).",
+  "reading_list": [
+    {
+      "identifier": "pmid:26979938",
+      "title": "C9orf72 ablation causes immune dysregulation characterized by leukocyte expansion, autoantibody production, and glomerulonephropathy in mice."
+    },
+    {
+      "identifier": "pmcid:PMC7005532",
+      "title": "Active poly-GA vaccination prevents microglia activation and motor deficits in a C9orf72 mouse model."
+    },
+    {
+      "identifier": "pmid:32814898",
+      "title": "C9orf72 in myeloid cells suppresses STING-induced inflammation."
+    },
+    {
+      "identifier": "pmcid:PMC13196659",
+      "title": "Immunotherapeutic landscape of amyotrophic lateral sclerosis: A bibliometric analysis of research trends, translational priorities, and collaboration networks (2006-2025)."
+    },
+    {
+      "identifier": "pmcid:PMC13427468",
+      "title": "Site-targeted proximal complement C3 inhibition, but not C5 blockade, attenuates neurodegeneration in a mouse model of amyotrophic lateral sclerosis: Implications for failed clinical trials."
+    },
+    {
+      "identifier": "pmcid:PMC4749695",
+      "title": "Immunoablation and Stem Cell Transplantation in Amyotrophic Lateral Sclerosis: The Ultimate Test for the Autoimmune Pathogenesis Hypothesis."
+    },
+    {
+      "identifier": "doi:10.1001/jamaneurol.2023.2851",
+      "title": "Efficacy and Safety of Ravulizumab, a Complement C5 Inhibitor, in Adults With Amyotrophic Lateral Sclerosis: A Randomized Clinical Trial."
+    },
+    {
+      "identifier": "doi:10.3389/fimmu.2023.1193507",
+      "title": "Low T-cell reactivity to TDP-43 peptides in ALS."
+    },
+    {
+      "identifier": "pmid:27206760",
+      "title": "Full ablation of C9orf72 in mice causes immune system-related pathology and neoplastic events but no motor neuron defects."
+    },
+    {
+      "identifier": "doi:10.1007/s00401-023-02568-y",
+      "title": "Defects in lysosomal function and lipid metabolism in human microglia harboring a TREM2 loss of function mutation."
+    },
+    {
+      "identifier": "pmcid:PMC10149854",
+      "title": "Reduced C9orf72 expression exacerbates polyGR toxicity in patient iPSC-derived motor neurons and a Type I protein arginine methyltransferase inhibitor reduces that toxicity."
+    },
+    {
+      "identifier": "pmcid:PMC10523463",
+      "title": "Causal ALS genes impact the MHC class II antigen presentation pathway."
+    },
+    {
+      "identifier": "pmcid:PMC10800391",
+      "title": "Editorial: Molecular mechanisms underlying <i>C9orf72</i> neurodegeneration, volume II."
+    },
+    {
+      "identifier": "pmcid:PMC11346543",
+      "title": "Toxic gain-of-function mechanisms in <i>C9orf72</i> ALS-FTD neurons drive autophagy and lysosome dysfunction."
+    },
+    {
+      "identifier": "pmcid:PMC11729807",
+      "title": "C9orf72 role in myeloid cells: new perspectives in the investigation of the neuro-immune crosstalk in amyotrophic lateral sclerosis and frontotemporal dementia."
+    },
+    {
+      "identifier": "pmcid:PMC11833520",
+      "title": "Efficacy and Safety of Zilucoplan in Amyotrophic Lateral Sclerosis: A Randomized Clinical Trial."
+    },
+    {
+      "identifier": "pmcid:PMC12586167",
+      "title": "C9orf72 hexanucleotide repeat expansions impair microglial response in ALS."
+    },
+    {
+      "identifier": "pmcid:PMC13111345",
+      "title": "Gut microbiota and ALS: cause, consequence or correlation? - a systematic review."
+    },
+    {
+      "identifier": "pmcid:PMC13452691",
+      "title": "TDP-43-immunity-microbiota axis in amyotrophic lateral sclerosis: A potential pathogenic mechanism."
+    },
+    {
+      "identifier": "pmcid:PMC3150148",
+      "title": "Autoimmunity in amyotrophic lateral sclerosis: past and present."
+    },
+    {
+      "identifier": "pmcid:PMC4596620",
+      "title": "Interleukin-1 Antagonist Anakinra in Amyotrophic Lateral Sclerosis--A Pilot Study."
+    },
+    {
+      "identifier": "pmcid:PMC7547039",
+      "title": "C9orf72 loss-of-function: a trivial, stand-alone or additive mechanism in C9 ALS/FTD?"
+    },
+    {
+      "identifier": "pmid:25884010",
+      "title": "Randomized phase 2 trial of NP001-a novel immune regulator: Safety and early efficacy in ALS."
+    },
+    {
+      "identifier": "pmid:27844039",
+      "title": "Increased prevalence of autoimmune disease within C9 and FTD/MND cohorts: Completing the picture."
+    },
+    {
+      "identifier": "pmid:34791571",
+      "title": "Plasma exchange with albumin replacement and disease progression in amyotrophic lateral sclerosis: a pilot study."
+    },
+    {
+      "identifier": "pmid:37250330",
+      "title": "C9ORF72 suppresses JAK-STAT mediated inflammation."
+    },
+    {
+      "identifier": "pmid:41241727",
+      "title": "Loss of C9orf72 impacts the peripheral neuromuscular system via immune dysregulation and accelerates the progression of amyotrophic lateral sclerosis in SOD-1 mutant mice."
+    },
+    {
+      "identifier": "pmid:41821014",
+      "title": "Immune imbalance between T helper 1, T helper 17 and regulatory T cells fuels amyotrophic lateral sclerosis pathogenesis: disease trajectory, diagnosis and therapeutic implications."
+    }
+  ]
+}

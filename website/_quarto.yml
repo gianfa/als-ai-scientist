@@ -1,0 +1,80 @@
+# Quarto website built from the Markdown in docs/ and published to GitHub Pages by .github/workflows/pages.yml.
+# docs/ stays the source of truth: build.sh renders it together with this folder from a disposable build tree
+# (website/.build), so the paths below are relative to that tree.
+project:
+  type: website
+  output-dir: ../_site
+  render:
+    - index.qmd
+    - "*.md"
+    - "!README.md"
+  resources:
+    - assets/
+
+# Properties of the project page (index.qmd), read there with {{< meta project-page.* >}}.
+project-page:
+  title: "An Auditable Multi-Agent System for Hypothesis Generation in C9orf72-Associated ALS"
+  venue: "International AI Summer School — IAISS 2026"  # linked to iaiss-url on the page
+  authors: "Gianfrancesco Angelini"
+  affiliation: "Medical Physics Section, Department of Biomedicine and Prevention, University of Rome Tor Vergata"  # as in CITATION.cff
+  report: assets/tech-report/report.pdf
+  github: https://github.com/gianfa/als-ai-scientist
+  linkedin: https://www.linkedin.com/in/gian-angelini/
+  iaiss-url: https://2026.iaiss.cc/
+  docs: quick-start.html
+
+website:
+  title: "ALS AI Scientist"
+  description: "IAISS 2026 Project 10: an auditable end-to-end scientific discovery system for ALS/C9orf72."
+  repo-url: https://github.com/gianfa/als-ai-scientist
+  page-navigation: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: quick-start.md
+        text: Quick start
+      - href: pipeline.md
+        text: Pipeline
+    right:
+      - icon: github
+        href: https://github.com/gianfa/als-ai-scientist
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - section: "Getting started"
+        contents:
+          - quick-start.md
+          - data-acquisition.md
+          - devcontainer.md
+      - section: "System"
+        contents:
+          - pipeline.md
+          - experiment-selection.md
+          - agents.md
+      - section: "Tools"
+        contents:
+          - tools/literature.md
+          - tools/drug-lookup.md
+          - tools/observer-ui.md
+          - tools/evaluation.md
+      - section: "Running and checking"
+        contents:
+          - testing.md
+      - section: "Reference"
+        contents:
+          - reference.md
+          - licensing.md
+
+filters:
+  - github-alerts.lua
+
+format:
+  html:
+    theme: [cosmo, paper.scss]
+    toc: true
+    toc-title: Contents
+    number-sections: true
+    code-copy: true
+    smooth-scroll: true

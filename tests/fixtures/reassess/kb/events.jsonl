@@ -1,0 +1,6 @@
+{"run_id":"FIX-REASSESS","created_at":"2026-10-09T12:00:00Z","id":"V-1","event":"written","record_id":"H-1","agent_id":"fixture","detail":null}
+{"run_id":"FIX-REASSESS","created_at":"2026-10-09T12:00:00Z","id":"V-2","event":"written","record_id":"C-1","agent_id":"fixture","detail":null}
+{"run_id":"FIX-REASSESS","created_at":"2026-10-09T12:00:00Z","id":"V-3","event":"written","record_id":"C-2","agent_id":"fixture","detail":null}
+{"run_id":"FIX-REASSESS","created_at":"2026-10-09T12:00:00Z","id":"V-4","event":"written","record_id":"C-3","agent_id":"fixture","detail":null}
+{"run_id":"FIX-REASSESS","created_at":"2026-10-09T12:00:00Z","id":"V-5","event":"written","record_id":"L-1","agent_id":"fixture","detail":null}
+{"run_id":"FIX-REASSESS","created_at":"2026-10-09T12:00:00Z","id":"V-6","event":"written","record_id":"EXP-1","agent_id":"fixture","detail":null}

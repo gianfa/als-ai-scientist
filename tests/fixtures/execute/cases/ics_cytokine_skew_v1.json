@@ -1,0 +1,14 @@
+{
+  "run_id": "FIX-EXECUTE",
+  "kb": "../kb",
+  "experiment_id": "EXP-1",
+  "sources": [
+    {"id": "michaelis-zenodo-cytometry",
+     "path": "../data/ics_cytokine_skew_v1/michaelis-2025-zenodo",
+     "kind": "raw"},
+    {"id": "michaelis-source-data",
+     "path": "../data/ics_cytokine_skew_v1/source.xlsx",
+     "kind": "table"}
+  ],
+  "note": "ics_cytokine_skew_v1: a 2-donor-per-group synthetic Michaelis-shaped ICS deposit (4 records) and its own source-data sheet, both reproduced by construction. select() should choose EXP-1 as data_supported."
+}

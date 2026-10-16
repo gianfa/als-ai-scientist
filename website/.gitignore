@@ -1,0 +1,3 @@
+# Disposable build tree and rendered output, both made by build.sh
+.build/
+_site/

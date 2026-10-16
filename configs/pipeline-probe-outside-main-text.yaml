@@ -1,0 +1,137 @@
+# Probe configuration: does the `outside_main_text` flag stop an agent quoting a table as main text?
+#
+# In a production run the agents may ask only for main-text sections, so the rule is never in a position to
+# act. This config puts it there on purpose, with `--phases data,literature` and a
+# knowledge base of its own so the shared one is untouched.
+#
+# Everything else is `configs/pipeline.yaml` unchanged, so the agent meets the same prompt as production.
+version: "1"
+
+objective: >-
+  Identify a therapeutic intervention capable of selectively modifying the C9orf72-associated immune mechanism in
+  ALS while preserving systemic immune competence and protecting motor neurons.
+
+launcher:
+  model: claude-sonnet-5          # the `claude -p` session that only calls the Workflow tool
+  timeout_s: 1800                 # per phase
+  # No per-session budget: each session is launched with what is left of run_max_cost_usd below. A smaller
+  # per-phase cap stops the workflow's agents mid-phase and loses what they spent.
+
+# This probe launches ONE agent in ONE phase, expected at 0.20-0.60 USD, so 2 is roughly three times the top
+# of that range: enough that the cap cannot end the probe early and small enough that a runaway stops at once.
+run_max_cost_usd: 2               # one agent in one phase; expected 0.20-0.60 USD, so 2 is ~3x the top
+
+literature_store: literature/store
+fetch_max_new: 10                 # papers newly downloaded per phase to check quotes against
+
+phases:
+  data:
+    sources:
+    - id: michaelis-table1-epitopes
+      acquire:
+        see: docs/data-acquisition.md section 1
+        steps:
+        - run: scripts/data/paper-download.py --format pdf
+        - by_hand: open the URL it prints, save the PDF as literature/inbox/michaelis-2025.pdf, then extract it with
+            Paper2Agent using the command in docs/data-acquisition.md section 1.1 — the --output path and
+            the default table asset names are what this source's path depends on
+        - run: scripts/setup/check-paper2agent.sh
+      path: dist/michaelis-2025-agent/skill/michaelis-2025-paper/assets/table/table-p0006-001.csv
+      kind: table
+      license_note: Extraction from Michaelis et al. (2025), CC BY-NC-ND 4.0; local paper2agent output, not redistributed.
+    - id: michaelis-table2-hla
+      acquire:
+        see: docs/data-acquisition.md section 1
+        steps:
+        - run: scripts/data/paper-download.py --format pdf
+        - by_hand: open the URL it prints, save the PDF as literature/inbox/michaelis-2025.pdf, then extract it with
+            Paper2Agent using the command in docs/data-acquisition.md section 1.1 — the --output path and
+            the default table asset names are what this source's path depends on
+        - run: scripts/setup/check-paper2agent.sh
+      path: dist/michaelis-2025-agent/skill/michaelis-2025-paper/assets/table/table-p0006-007.csv
+      kind: table
+      license_note: Extraction from Michaelis et al. (2025), CC BY-NC-ND 4.0; local paper2agent output, not redistributed.
+    - id: iedb-netmhciipan-cache
+      acquire:
+        see: docs/data-acquisition.md section 5
+        steps:
+        - by_hand: read section 5 first; the DTU academic licence must apply to you. Needs the two tables above
+        - run: scripts/data/iedb-cache-acquire.py
+      path: data/external/iedb-cache/netmhciipan.jsonl
+      kind: table
+      license_note: IEDB/NetMHCIIpan predictions acquired once under the DTU academic licence (LICENSES.md); third-party
+        output, git-ignored, not redistributed. The licence forbids publishing benchmark results of the predictor.
+    - id: als-gwas-gcst90027164
+      acquire:
+        see: docs/data-acquisition.md section 4
+        steps:
+        - run: scripts/data/gwas-data-download.sh
+      path: data/external/gwas-als/GCST90027164_buildGRCh37.tsv.gz
+      kind: sumstats
+      license_note: 'GWAS Catalog summary statistics, GCST90027164 (van Rheenen et al. 2021),
+        European-ancestries meta-analysis, GRCh37, as submitted: the study metadata declares
+        is_harmonised false, and the catalogue harmonised/ deposit is a different file. EMBL-EBI Terms of
+        Use; cite the study.'
+    # Read by the registered `ics_cytokine_skew_v1` analysis, which uses the FlowJo workspaces of the four ICS
+    # records and the deposited FCS file names; no analysis reads FCS events.
+    - id: michaelis-zenodo-cytometry
+      acquire:
+        see: docs/data-acquisition.md section 2
+        steps:
+        - run: scripts/data/michaelis-data-download.sh
+      path: data/external/michaelis-2025-zenodo
+      kind: raw
+      license_note: Michaelis et al. (2025) Zenodo deposit, raw flow-cytometry files; not redistributed.
+      required: false
+    # The figure source data of the article, read by `ics_cytokine_skew_v1` to check its recomputed values
+    # against the published ones (sheet "ED Fig. 4").
+    - id: michaelis-source-data
+      acquire:
+        see: docs/data-acquisition.md section 3
+        steps:
+        - by_hand: run the curl block of docs/data-acquisition.md section 3
+      path: data/external/michaelis-2025-nature-supp/41586_2025_9588_MOESM3_ESM.xlsx
+      kind: table
+      license_note: Source data of Michaelis et al. (2025), CC BY-NC-ND 4.0 article; local only, not redistributed.
+      required: false
+  compute:
+    analyses:
+    - a1_immunodominance
+    - a2_epitope_clustering
+    - a3_gwas_loci
+    - a4_hla_binding
+    seed: 20260928
+  literature:
+    model: claude-sonnet-5
+    max_claims: 8
+    # ONE question, and one whose answer exists in the paper only inside Extended Data Table 1, which
+    # `paper_navigate` lists with `outside_main_text: true`. The prompt is deliberately NOT modified to warn
+    # about tables: the probe measures whether the tool's own flag plus the standing prompt suffice.
+    questions:
+      - How many participants were in each cohort of the primary C9orf72 ALS study, and what were their ages and sex distribution?
+  generate:
+    model: claude-sonnet-5
+    context_limit: 40             # claims passed to each author
+    perspectives:
+      - immunology (loss of peripheral tolerance, T-cell polarisation)
+      - neurodegeneration (motor-neuron injury and the role of C9orf72 loss/gain of function)
+      - therapeutics (what could be modulated, and with which intervention class)
+  review:
+    model: claude-sonnet-5
+    reviewers: 2
+    hops: 2
+  verify:
+    model: claude-sonnet-5
+    batch_size: 10
+  design:
+    model: claude-sonnet-5
+    hops: 2
+  arbitrate:
+    model: claude-sonnet-5
+    hops: 2
+  intervene:
+    model: claude-sonnet-5
+    hops: 2
+  synthesize:
+    model: claude-sonnet-5
+    hops: 1

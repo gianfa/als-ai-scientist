@@ -1,0 +1,8 @@
+{
+  "run_id": "FIX-LITERATURE",
+  "kb": "../kb",
+  "questions": [
+    "Which C9orf72-specific T-cell responses are observed in ALS, in which T-cell subsets, and with which cytokines?"
+  ],
+  "note": "One question, so one agent. The knowledge base and the literature store are both empty, so every `check_quote` must answer `paper_not_in_store`: whatever paper the agent finds, the only way to a verified quote is `fetch_paper`. The question is deliberately the production one, not a contrived one — what is being tested is whether a real agent on a real prompt uses the tool, so the prompt and the question stay as a run would have them."
+}

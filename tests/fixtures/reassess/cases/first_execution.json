@@ -1,0 +1,51 @@
+{
+  "run_id": "FIX-REASSESS",
+  "kb": "../kb",
+  "artifacts": "../experiment-analysis",
+  "note": "pl-prod-005's shape: the analysis ran for the first time, so its facts are new rows.",
+  "execute_report": {
+    "selected": [
+      {
+        "experiment_id": "EXP-1",
+        "hypothesis_id": "H-1",
+        "analysis_id": "hla_panel_compact_v1",
+        "tested_claims": [
+          "C-1"
+        ],
+        "dataset_refs": [
+          "fixture-epitopes",
+          "fixture-hla"
+        ],
+        "feasibility": "data_supported",
+        "selection_reason": "bought EXP with the registered handler and supported inputs"
+      }
+    ],
+    "skipped": [],
+    "executions": [
+      {
+        "experiment_id": "EXP-1",
+        "hypothesis_id": "H-1",
+        "analysis_id": "hla_panel_compact_v1",
+        "tested_claims": [
+          "C-1"
+        ],
+        "status": "executed",
+        "result_digest": "7d531cfe240d24ff04a2920f71ab740679ee0f37ebfde6e696229c0c6fed41c1",
+        "artifact": "experiment-analysis/EXP-1/summary.json",
+        "interpretation_check": {
+          "faithful": true,
+          "errors": [],
+          "verified_result_digest": "7d531cfe240d24ff04a2920f71ab740679ee0f37ebfde6e696229c0c6fed41c1",
+          "outcome": "panel_condition_met"
+        },
+        "written": [
+          "C-2",
+          "C-3"
+        ],
+        "seen_again": {}
+      }
+    ],
+    "executed_count": 1,
+    "status": "executed"
+  }
+}

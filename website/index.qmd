@@ -1,0 +1,47 @@
+---
+title: "{{< meta project-page.title >}}"
+pagetitle: "ALS AI Scientist"
+page-layout: custom
+toc: false
+number-sections: false
+body-classes: project-page
+---
+
+::: {.pp-hero}
+
+[A project developed at the [{{< meta project-page.venue >}}]({{< meta project-page.iaiss-url >}}), Project 10]{.pp-venue}
+
+# {{< meta project-page.title >}} {.pp-title .unnumbered .unlisted}
+
+[{{< meta project-page.authors >}}]{.pp-authors}
+[{{< meta project-page.affiliation >}}]{.pp-affiliation}
+
+::: {.pp-links}
+[<i class="bi bi-file-earmark-pdf"></i> Technical report]({{< meta project-page.report >}}){.pp-btn download=""}
+[<i class="bi bi-github"></i> Code]({{< meta project-page.github >}}){.pp-btn}
+[<i class="bi bi-linkedin"></i> LinkedIn]({{< meta project-page.linkedin >}}){.pp-btn}
+[<i class="bi bi-book"></i> Docs]({{< meta project-page.docs >}}){.pp-btn}
+:::
+
+:::
+
+::: {.pp-body}
+
+::: {.pp-teaser}
+<video src="assets/videos/demo-2.mp4" autoplay loop muted playsinline controls
+       aria-label="The local observer UI inspecting a run: workflow design, run overview, story and evaluation."></video>
+:::
+
+## Abstract {.unnumbered}
+
+From an open objective about ALS/C9orf72, the system moves through evidence, mechanism, competing
+hypotheses, candidate intervention, adversarial review and falsification experiments to a final research
+proposal. Every material claim is traceable to an evidence identifier and, from there, to a source or a
+reproducible computational result. It is a research system, not clinical decision support, and a run may
+validly conclude that the evidence is insufficient.
+
+## Citation {.unnumbered}
+
+{{< include _citation.md >}}
+
+:::

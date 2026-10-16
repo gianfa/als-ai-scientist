@@ -1,0 +1,10 @@
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.481911Z","id":"V-1","event":"written","record_id":"H-1","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.483068Z","id":"V-2","event":"written","record_id":"C-1","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.483698Z","id":"V-3","event":"written","record_id":"L-1","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.484306Z","id":"V-4","event":"written","record_id":"EXP-1","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.484920Z","id":"V-5","event":"written","record_id":"D-1","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.484960Z","id":"V-6","event":"written","record_id":"H-2","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.485009Z","id":"V-7","event":"written","record_id":"C-2","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.485042Z","id":"V-8","event":"written","record_id":"L-2","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.485081Z","id":"V-9","event":"written","record_id":"EXP-2","agent_id":"fixture","detail":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-11T06:22:20.485114Z","id":"V-10","event":"written","record_id":"D-2","agent_id":"fixture","detail":null}

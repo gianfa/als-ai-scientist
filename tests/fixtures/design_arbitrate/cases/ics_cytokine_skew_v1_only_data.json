@@ -1,0 +1,13 @@
+{
+  "run_id": "FIX-DESIGN-ARBITRATE",
+  "kb": "../kb",
+  "sources": [
+    {"id": "michaelis-zenodo-cytometry",
+     "path": "../../execute/data/ics_cytokine_skew_v1/michaelis-2025-zenodo",
+     "kind": "raw"},
+    {"id": "michaelis-source-data",
+     "path": "../../execute/data/ics_cytokine_skew_v1/source.xlsx",
+     "kind": "table"}
+  ],
+  "note": "Only the two ics_cytokine_skew_v1 inputs are declared -- none of hla_panel_compact_v1's three. A live design agent cannot propose the HLA handler as data_supported here because the data for it simply is not in this run's manifest, not because the prompt forbids it. Whether it proposes and arbitrate buys ics_cytokine_skew_v1 (or a wet-lab experiment instead, or nothing) is what the live test observes and reports, not something this fixture can force."
+}

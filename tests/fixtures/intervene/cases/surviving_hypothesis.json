@@ -1,0 +1,5 @@
+{
+  "run_id": "FIX-EXECUTE",
+  "kb": "../../execute/kb",
+  "note": "intervene over the one hypothesis the arbiter kept in run FIX-EXECUTE (H-1, decision D-1 'buy'). Reuses the execute fixture's knowledge base: intervene reads only the hypotheses of the run the arbiter did not reject, which that KB already holds, so a second synthetic KB would add a file to keep in step for no gain. The probe copies it and never writes to it."
+}

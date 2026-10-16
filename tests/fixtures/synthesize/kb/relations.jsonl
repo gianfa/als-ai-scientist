@@ -1,0 +1,2 @@
+{"run_id":"FIX-SYNTH","created_at":"2026-10-02T12:00:00Z","id":"L-1","source_id":"C-1","target_id":"H-1","type":"part_of","justification_method":"agent_inference","provenance_status":"unverified","source_refs":[],"rationale":null}
+{"run_id":"FIX-SYNTH","created_at":"2026-10-02T12:00:00Z","id":"L-2","source_id":"C-2","target_id":"H-2","type":"part_of","justification_method":"agent_inference","provenance_status":"unverified","source_refs":[],"rationale":null}

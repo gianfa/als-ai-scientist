@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using these metadata."
+title: "ALS AI Scientist"
+version: "0.1.0"
+repository-code: "https://github.com/gianfa/als-ai-scientist"
+date-released: "2026-10-16"
+
+authors:
+  - family-names: Angelini
+    given-names: Gianfrancesco
+    affiliation: "Medical Physics Section, Department of Biomedicine and Prevention, University of Rome Tor Vergata"
+    orcid: "https://orcid.org/0009-0007-3841-4347"
+references:
+  - type: data
+    title: "IAISS 2026 Project 10: ALS AI Scientist, run archives and results (pl-prod-014 to pl-prod-018)"
+    authors:
+      - family-names: Angelini
+        given-names: Gianfrancesco
+        affiliation: "Medical Physics Section, Department of Biomedicine and Prevention, University of Rome Tor Vergata"
+    doi: "10.5281/zenodo.23370543"
+    version: "0.1.1"
+    year: 2026

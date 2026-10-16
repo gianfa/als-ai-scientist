@@ -1,0 +1,62 @@
+# DRAFT. Checks that the project's external dependencies are still reachable: the Paper2Agent skill at the
+# pinned commit, the registries that locate the Michaelis et al. (2025) full text, and the IEDB tools API.
+# It downloads no paper and runs no prediction: only lightweight reachability checks, so it stays within the
+# third parties' terms and rate limits (IEDB/NetMHC are under the DTU academic licence, see LICENSES.md).
+# Weekly and manual, never on push: an outage elsewhere must not fail the project's own CI.
+name: External integrity (draft)
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"  # Mondays 05:17 UTC
+  workflow_dispatch:
+    inputs:
+      build_image:
+        description: "Also build the devcontainer image (not pushed, not saved)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  paper2agent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone Paper2Agent at the commit pinned in the Dockerfile
+        run: |
+          commit="$(sed -nE 's/^ARG PAPER2AGENT_COMMIT=//p' .devcontainer/Dockerfile)"
+          test -n "$commit"
+          git clone --filter=blob:none https://github.com/jmiao24/Paper2Agent.git /tmp/Paper2Agent
+          git -C /tmp/Paper2Agent checkout --detach "$commit"
+          test -f /tmp/Paper2Agent/skills/paper2agent/SKILL.md
+
+  paper-registries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Locate the full text through Crossref and Europe PMC (no download)
+        run: python scripts/data/paper-download.py --list-only
+
+  iedb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: IEDB tools API answers
+        run: |
+          # The API expects a POST with a peptide; a bare request only proves the host answers.
+          # Any status below 500 counts as reachable.
+          code="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 60 \
+            https://tools-cluster-interface.iedb.org/tools_api/mhcii/)"
+          echo "HTTP $code"
+          test "$code" -lt 500
+
+  devcontainer-image:
+    if: github.event_name == 'workflow_dispatch' && inputs.build_image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the devcontainer image (discarded with the runner)
+        run: docker build -f .devcontainer/Dockerfile --build-arg PYTHON_VERSION=3.10 -t als-devcontainer:ci .

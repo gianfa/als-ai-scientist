@@ -1,0 +1,33 @@
+{
+  "name": "ALS AI Scientist",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": { "PYTHON_VERSION": "3.10" }
+  },
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+  "workspaceFolder": "/app/als-ai-scientist",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/app/als-ai-scientist,type=bind",
+  "runArgs": ["--cap-drop=ALL", "--security-opt=no-new-privileges:true", "--pids-limit=1024"],
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.venv"
+  },
+  "mounts": [
+    "source=als-ai-scientist-claude-home,target=/home/vscode/.claude,type=volume"
+  ],
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+  "forwardPorts": [8765],
+  "portsAttributes": {
+    "8765": { "label": "wf_observer UI", "onAutoForward": "silent" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "ms-python.debugpy"],
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python"
+      }
+    }
+  }
+}

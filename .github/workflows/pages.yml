@@ -1,0 +1,55 @@
+# Renders the Quarto site (website/ + docs/) and publishes it to GitHub Pages.
+# One-time setup on GitHub: Settings -> Pages -> Source: "GitHub Actions".
+name: Publish docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**", "website/**", "CITATION.cff", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # Disabled. Pages is not enabled on the development repository, so `actions/deploy-pages` failed with
+    # `status: 404` on every push that touched `docs/` or `website/`: the site built, and there was nowhere
+    # to publish it. `false` skips this job and, with it, `deploy`, which needs it; the run reports as
+    # skipped instead of failed. To re-enable, put back the repository guard this replaced, which published
+    # from the project's own repositories only and skipped any fork or other copy:
+    #   if: github.repository == 'gianfa/iaiss-2026-project10-als-ai-scientist' || github.repository == 'gianfa/als-ai-scientist'
+    # On the public repository, Settings -> Pages -> Source: "GitHub Actions" has to be set once first.
+    if: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.19  # the version website/build.sh was checked with
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: PyYAML, for website/cff_citation.py
+        run: python -m pip install pyyaml
+      - name: Render
+        run: website/build.sh
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: website/_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

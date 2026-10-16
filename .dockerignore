@@ -1,0 +1,11 @@
+.git
+.meta
+.venv
+**/.venv
+**/node_modules
+**/__pycache__
+dist
+experiments
+results
+artifacts
+worktrees

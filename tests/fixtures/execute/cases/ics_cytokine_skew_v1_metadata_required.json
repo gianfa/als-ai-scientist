@@ -1,0 +1,14 @@
+{
+  "run_id": "FIX-EXECUTE-2",
+  "kb": "../kb",
+  "experiment_id": "EXP-2",
+  "sources": [
+    {"id": "michaelis-zenodo-cytometry",
+     "path": "../data/ics_cytokine_skew_v1/michaelis-2025-zenodo",
+     "kind": "raw"},
+    {"id": "michaelis-source-data",
+     "path": "../data/ics_cytokine_skew_v1/source.xlsx",
+     "kind": "table"}
+  ],
+  "note": "pl-prod-009's actual shape: EXP-2 declares required_metadata using the three controlled tools.data.cytometry.METADATA_FIELDS keys (fcs_file_name_group_label, fcs_file_name_condition_label, flowjo_donor_group) instead of free prose. Before the fix (no metadata_fields inventory at all) this would have been unverified, as EXP-1/5/7 were on the real pl-prod-009 run; with the fix, the synthetic deposit's own group/condition labels and FlowJo donor groups resolve it to data_supported, so select() should choose EXP-2."
+}

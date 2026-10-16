@@ -1,0 +1,14 @@
+{
+  "run_id": "FIX-SYNTH",
+  "kb": "../kb",
+  "experiment_id": "EXP-2",
+  "sources": [
+    {"id": "michaelis-zenodo-cytometry",
+     "path": "../../execute/data/ics_cytokine_skew_v1/michaelis-2025-zenodo",
+     "kind": "raw"},
+    {"id": "michaelis-source-data",
+     "path": "../../execute/data/ics_cytokine_skew_v1/source.xlsx",
+     "kind": "table"}
+  ],
+  "note": "pl-prod-012's shape: two hypotheses bought the same analysis on the same inputs. EXP-1 computes it, EXP-2 is its reuse (ADR 0030) and has no receipt of its own; synthesize must verify the receipt under EXP-1."
+}

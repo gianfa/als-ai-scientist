@@ -1,0 +1,8 @@
+{
+  "experiment_id": "EXP-1",
+  "analysis_id": "hla_panel_compact_v1",
+  "result_digest": "7d531cfe240d24ff04a2920f71ab740679ee0f37ebfde6e696229c0c6fed41c1",
+  "outcome": "panel_condition_met",
+  "results": {"selected_pool_size": 2, "n": 21, "covered_alleles": 4, "panel_condition_met": true},
+  "limitations": ["Synthetic fixture: four predicted alleles; no population allele frequencies, no observed presentation."]
+}

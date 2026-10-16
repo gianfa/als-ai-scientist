@@ -1,0 +1,75 @@
+{
+  "_comment": "Shared by tests/test_tools_literature_quotes.py and tests/workflow/classify-quote.test.js: both implementations must agree on every case. The source has orphan punctuation (',.') like the real Europe PMC text of Michaelis 2025.",
+  "source": "Neuroinflammation is apparent in affected tissues, particularly in the spinal cord,. Autoimmune responses are thought to have a key role in ALS pathology,\nand it is hypothesized that T cells contribute to the rapid loss of neurons. These responses are mediated by CD4+ T cells that release IL-5 (P = 0.001) in ALS. The \ufb01nding was \u201cconfirmed\u201d in a cohort of 28 controls.",
+  "cases": [
+    {
+      "name": "orphan comma and punctuation are ignored",
+      "quote": "particularly in the spinal cord. Autoimmune responses are thought to have a key role",
+      "verdict": "exact",
+      "critical_mismatch": false,
+      "passage_contains": "spinal cord,. Autoimmune"
+    },
+    {
+      "name": "case and line breaks are ignored",
+      "quote": "ALS PATHOLOGY and it is hypothesized that T cells",
+      "verdict": "exact"
+    },
+    {
+      "name": "ligature and typographic quotes are normalised",
+      "quote": "The finding was \"confirmed\" in a cohort of 28 controls",
+      "verdict": "exact"
+    },
+    {
+      "name": "elided quote is near and returns the stretch",
+      "quote": "Autoimmune responses are thought ... hypothesized that T cells contribute to the rapid loss of neurons",
+      "verdict": "near",
+      "passage_contains": "rapid loss of neurons"
+    },
+    {
+      "name": "changed number is never exact and is flagged",
+      "quote": "These responses are mediated by CD4+ T cells that release IL-5 (P = 0.05) in ALS",
+      "verdict_not": "exact",
+      "critical_mismatch": true
+    },
+    {
+      "name": "inserted negation is never exact and is flagged",
+      "quote": "These responses are not mediated by CD4+ T cells that release IL-5 in ALS",
+      "verdict_not": "exact",
+      "critical_mismatch": true
+    },
+    {
+      "name": "unrelated sentence is absent",
+      "quote": "Treatment with the drug did not alter the course of the disease in any patient group",
+      "verdict": "absent"
+    },
+    {
+      "name": "too short is absent",
+      "quote": "spinal cord",
+      "verdict": "absent"
+    },
+    {
+      "name": "empty quote is absent",
+      "quote": "",
+      "verdict": "absent"
+    },
+    {
+      "name": "whitespace-only quote is absent",
+      "quote": "   ",
+      "verdict": "absent"
+    }
+  ],
+  "source_cases": [
+    {
+      "name": "empty source is absent",
+      "quote": "Autoimmune responses are thought to have a key role",
+      "source": "",
+      "verdict": "absent"
+    },
+    {
+      "name": "source without any token is absent (no crash)",
+      "quote": "Autoimmune responses are thought to have a key role",
+      "source": "... ,. ;; --",
+      "verdict": "absent"
+    }
+  ]
+}
