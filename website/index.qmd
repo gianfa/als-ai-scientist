@@ -34,11 +34,34 @@ body-classes: project-page
 
 ## Abstract {.unnumbered}
 
-From an open objective about ALS/C9orf72, the system moves through evidence, mechanism, competing
-hypotheses, candidate intervention, adversarial review and falsification experiments to a final research
-proposal. Every material claim is traceable to an evidence identifier and, from there, to a source or a
-reproducible computational result. It is a research system, not clinical decision support, and a run may
-validly conclude that the evidence is insufficient.
+<!-- The abstract of the technical report (reports/technical-report.pdf), copied as it stands; keep the two in step.
+Its one citation is written out with its DOI, since the page has no bibliography. -->
+
+Autonomous scientific discovery requires more than generating plausible hypotheses: scientific claims must remain
+traceable to evidence, open to criticism, and experimentally falsifiable. Starting from the C9orf72-associated
+T-cell autoreactivity reported by Michaelis et al. ([Nature, 2025](https://doi.org/10.1038/s41586-025-09588-6)),
+we investigate a central question: **Can a multi-agent system autonomously transform a biomedical observation
+into auditable, mechanistically explicit, and falsifiable therapeutic hypotheses for amyotrophic lateral sclerosis
+(ALS)?**
+
+We implement a twelve-phase workflow combining literature retrieval, independent hypothesis generation, adversarial
+review, evidence verification, computational analysis, experimental design, and therapeutic synthesis. The system
+builds on _Claude Code_'s dynamic workflows for multi-agent coordination, while a deterministic Python orchestrator
+controls phase execution, validation, and persistent state. An append-only knowledge base represents scientific
+claims, provenance, supporting and contradicting relationships, and epistemic status.
+
+We evaluate five end-to-end runs under identical configurations, comparing three executions with an initially
+empty knowledge base against two using accumulated knowledge. All runs generated structured research proposals;
+two returned a proposal outcome and three reported insufficient evidence. Deterministic biomedical analyses were
+reproducible, but agent-generated interpretations and evidential relationships remained vulnerable to
+overstatement. Notably, accumulated knowledge enabled the construction of longer mechanistic chains (12 and 13
+edges) without increasing the number of edges verified against their own source (one per chain), although a few
+agent-proposed edges were supported indirectly by other verified evidence.
+
+These findings demonstrate the feasibility of integrating scientific agents into an auditable discovery workflow
+while exposing a limitation of persistent agentic knowledge: structural coherence and knowledge accumulation do
+not necessarily imply stronger evidential support. The system generates falsifiable therapeutic hypotheses but
+establishes neither validated causal mechanisms nor therapeutic efficacy.
 
 ## Citation {.unnumbered}
 
